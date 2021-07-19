@@ -1,16 +1,28 @@
-const express = require('express');
+var express = require('express');
+var mongoose = require('mongoose');
+var path = require('path');
+var app = express()
+
 const methodOverride = require('method-override');
-const app = express();
+const bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded({extended:true}));
+app.use(bodyParser.json());
 
 app.use(express.static('public'));
 app.use(methodOverride('_method'));
+
+app.set('views',path.join(__dirname,'views'));
 app.set('view engine','ejs')
 
-var urlencoder = express.urlencoded({extended:false});
+require('./models/roommodel');
 
-const mongoClient = require('mongodb').MongoClient;
-const db_url = "mongodb+srv://user1:Password@cluster0.qyjhe.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
-const db_name = "Hotel_db";
+db_URL = db_url = "mongodb+srv://user1:Password@cluster0.qyjhe.mongodb.net/Hotel_db?retryWrites=true&w=majority";
+
+
+mongoose.connect(db_URL, {useUnifiedTopology:true, useNewUrlParser:true}, function(){
+  console.log("Successfully connected to the database");
+})
+
 
 // index page
 app.get('/', function(req, res) {  
@@ -22,6 +34,21 @@ app.get('/about', function(req, res) {
     res.render('pages/about');
   });
 
+// rooms page
+var roomController = require('./controllers/roomcontroller.js');
+app.get('/rooms', roomController.GetAll);
+
+// book room
+app.get('/book', function(req,res){
+  res.render('pages/booking-form.ejs')
+});
+
+
+// room-details page
+app.get('/room-details', function(req, res) {
+  res.render('pages/room-details');
+});
+
 // booking page
 app.get('/make_booking', function(req, res) {
     res.render('pages/make_booking'); 
@@ -31,30 +58,6 @@ app.get('/make_booking', function(req, res) {
 app.get('/manage_bookings', function(req, res) {
     res.render('pages/manage_bookings');
   });
-
-// register page
-app.get('/register', function(req, res) {
-    res.render('pages/register');
-  });
-
-// login page
-app.get('/login', function(req, res) {
-    res.render('pages/login');
-  });
-
-
-// customers list
-app.get("/customersList", function (req, res) {
-  mongoClient.connect(db_url, function(err, dbServer) {
-      if (err) throw err;
-      var myDatabase = dbServer.db('Hotel_db');
-      myDatabase.collection("customers").find({}).toArray(function(err, result) {
-        if (err) throw err;
-        res.render("pages/customersList", { customersList: result });
-        dbServer.close();
-      });
-    });
-})
 
 
 function insertNewCustomer(newCustomer){

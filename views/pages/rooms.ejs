@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('../partials/head'); %>
+</head>
+<body class="container">
+
+<header>
+  <%- include('../partials/header'); %>
+</header>
+
+<main>
+    <div class="topbody"></div>
+    <!-- Rooms Section Begin -->
+    <section>
+        <div class="table-data">
+            <table class="table">
+              <thead class="thead-dark">
+                <tr>
+                    <th>Room</th>
+                    <th>Available</th>
+                    <th>Size</th>
+                    <th>Occupancy</th>
+                    <th>Bed</th>
+                    <th>Price</th>
+                    <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>                
+                <%
+                if(roomsList.length!=0){
+                  var i=1;
+                  roomsList.forEach(function(data){
+                %>
+                  <tr>
+                    <td>
+                      <ul>
+                        <li><img class="room-thumbnail" src="/images/<%=data.image %>" alt=""></li>
+                        <li><%=data.type %></li>
+                      </ul>
+                    </td>
+                      <td><%=data.number %></td>
+                      <td><%=data.size %> Sq ft</td>
+                      <td><%=data.occupancy %></td>
+                      <td><%=data.bed %></td>
+                      <td>$<%=data.price %>/ night</td>
+                      <td><a href="/book/<%=data.type%>">Book Now</a></td>
+                  </tr>
+                <% i++; }) %>
+                <% } 
+                else{ %>
+                  <tr>
+                    <td colspan="7">No Data Found</td>
+                  </tr>
+                <% } %>
+              </tbody>
+            </table>
+        </div>
+    </section>
+    <!-- Rooms Section End -->
+
+
+
+</main>
+
+<footer>
+  <%- include('../partials/footer'); %>
+</footer>
+
+</body>
+</html>
