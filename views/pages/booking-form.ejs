@@ -18,51 +18,46 @@
                         <div class="form-header">
                             <h1>Make your reservation</h1>
                         </div>
-                        <form>
-                            <div class="form-group"> <input class="form-control" type="text" placeholder="Full Name"> <span class="form-label">Name</span> </div>
+                        <form action="/booking/new" method="POST">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <div class="form-group"> <input class="form-control" type="date" required> <span class="form-label">Check In</span> </div>
+                                    <div class="form-group"> <input class="form-control" type="text" name="first_name" required placeholder="First Name"> <span class="form-label">First Name</span> </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="form-group"> <input class="form-control" type="date" required> <span class="form-label">Check out</span> </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-group"> <select class="form-control" required>
-                                            <option value="" selected hidden>Select Room</option>
-                                            <option>Room 1</option>
-                                            <option>Room 2</option>
-                                            <option>Room 3</option>
-                                        </select> <span class="select-arrow"></span> <span class="form-label">Rooms</span> </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group"> <select class="form-control" required>
-                                            <option value="" selected hidden>no of adults</option>
-                                            <option>1</option>
-                                            <option>2</option>
-                                            <option>3</option>
-                                        </select> <span class="select-arrow"></span> <span class="form-label">Adults</span> </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group"> <select class="form-control" required>
-                                            <option value="" selected hidden>no of children</option>
-                                            <option>0</option>
-                                            <option>1</option>
-                                            <option>2</option>
-                                        </select> <span class="select-arrow"></span> <span class="form-label">Children</span> </div>
+                                    <div class="form-group"> <input class="form-control" type="text" name="last_name" required placeholder="Last Name"> <span class="form-label">Last Name</span> </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
-                                    <div class="form-group"> <input class="form-control" type="email" placeholder="Email Address"> <span class="form-label">Email</span> </div>
+                                    <div class="form-group"> <input class="form-control" type="date" name="check_in" required> <span class="form-label">Check In</span> </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="form-group"> <input class="form-control" type="tel" placeholder="Phone Number"> <span class="form-label">Phone</span> </div>
+                                    <div class="form-group"> <input class="form-control" type="date" name="check_out" required> <span class="form-label">Check out</span> </div>
                                 </div>
                             </div>
-                            <div class="form-btn"> <button class="submit-btn">Book Now</button> </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group"> 
+                                        <select class="form-control" id="room_type" name="room_type" required>
+                                            <option value="" selected hidden>Room Type</option>
+                                            <option value="Standard">Standard</option>
+                                            <option value="Double">Double</option>
+                                            <option value="Luxury">Luxury</option>
+                                            <option value="Luxury-Deluxe">Luxury-Deluxe</option>
+                                            <option value="Presidential">Presidential</option>
+                                        </select> <span class="select-arrow"></span> <span class="form-label">Rooms</span> 
+                                    </div>
+                                </div>           
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group"> <input class="form-control" type="email" name="email" placeholder="Email Address"> <span class="form-label">Email</span> </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group"> <input class="form-control" type="tel" name="phone" placeholder="Phone Number"> <span class="form-label">Phone</span> </div>
+                                </div>
+                            </div>
+                            <div class="form-btn"> <input type="submit" class="submit-btn"/> </div>
                         </form>
                     </div>
                 </div>
@@ -74,6 +69,17 @@
 <footer>
   <%- include('../partials/footer'); %>
 </footer>
+
+<script>
+    window.onload = function getURL() {
+        if(window.location.href != "http://localhost:3000/book"){
+            var url = window.location.href;
+            var urlarr = url.split('book/');
+            var roomtype=urlarr[1];
+            document.getElementById('room_type').value=roomtype;
+        }
+    }
+</script>
 
 </body>
 </html>

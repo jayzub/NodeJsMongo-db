@@ -1,0 +1,20 @@
+<html>
+    <head>
+
+    </head>
+    <body>
+        <h2>List of all the bookings</h2>
+        <section data-position='bookings'>
+            <% for(var i=0; i<allBookings.length; i++){ %>
+                <%= allBookings[i].first_name %> &nbsp;
+                <%= allBookings[i].last_name %> &nbsp;
+                <%= allBookings[i].email %> &nbsp;<br/>
+            <% } %>
+        </section>
+        <h2>Find Booking by ID</h2>
+        <form action="/bookings/findbyemail" method="GET">
+            <input type="text" name="email" id="email" placeholder="Enter Booking email"/>
+            <input type="submit" value="Search by email"/>
+        </form>
+    </body>
+</html>
