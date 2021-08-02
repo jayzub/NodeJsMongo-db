@@ -16,15 +16,15 @@
                 <div class="row">
                     <div class="booking-form">
                         <div class="form-header">
-                            <h1>Make your reservation</h1>
+                            <h1>Update your reservation</h1>
                         </div>
-                        <form action="/booking/new" method="POST">
+                        <form action="/bookings/update/${bookingref}" method="POST">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <div class="form-group"> <input class="form-control" type="text" name="first_name" required placeholder="First Name"> <span class="form-label">First Name</span> </div>
+                                    <div class="form-group"> <input class="form-control" type="text" name="first_name" value="<%=allBookings.first_name %>" required placeholder="First Name"> <span class="form-label">First Name</span> </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="form-group"> <input class="form-control" type="text" name="last_name" required placeholder="Last Name"> <span class="form-label">Last Name</span> </div>
+                                    <div class="form-group"> <input class="form-control" type="text" name="last_name" value="<%=allBookings.last_name %>" required placeholder="Last Name"> <span class="form-label">Last Name</span> </div>
                                 </div>
                             </div>
                             <div class="row">
@@ -38,7 +38,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group"> 
-                                        <select class="form-control" id="room_type" name="room_type" required>
+                                        <select class="form-control" id="room_type" value="<%=allBookings.room_type %>" name="room_type" required>
                                             <option value="" selected hidden>Room Type</option>
                                             <option value="Standard">Standard</option>
                                             <option value="Double">Double</option>
@@ -51,14 +51,14 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
-                                    <div class="form-group"> <input class="form-control" type="email" name="email" placeholder="Email Address"> <span class="form-label">Email</span> </div>
+                                    <div class="form-group"> <input class="form-control" type="email" name="email" value="<%=allBookings.email %>" placeholder="Email Address"> <span class="form-label">Email</span> </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="form-group"> <input class="form-control" type="tel" name="phone" placeholder="Phone Number"> <span class="form-label">Phone</span> </div>
+                                    <div class="form-group"> <input class="form-control" type="tel" name="phone" value="<%=allBookings.phone %>" placeholder="Phone Number"> <span class="form-label">Phone</span> </div>
                                 </div>
                             </div>
-                            <div class="form-group"> <input class="form-control" type="text" name="bookingref" id="bookingref" readonly> <span class="form-label">Booking Reference</span> </div>
-                            <div class="form-btn"> <input type="submit" class="submit-btn" value="Book"/> </div>
+                            <div class="form-group"> <input class="form-control" type="text" name="bookingref" value="<%=allBookings.bookingref %>" id="bookingref" readonly> <span class="form-label">Booking Reference</span> </div>
+                            <div class="form-btn"> <input type="submit" class="submit-btn" value="Update"/> </div>
                         </form>
                     </div>
                 </div>
@@ -70,24 +70,6 @@
 <footer>
   <%- include('../partials/footer'); %>
 </footer>
-
-<script>
-    window.onload = function getURL() {
-        if(window.location.href != "http://localhost:3000/book"){
-            var url = window.location.href;
-            var urlarr = url.split('book/');
-            var roomtype=urlarr[1];
-            document.getElementById('room_type').value=roomtype;
-        }
-
-        var bookingref = '';
-        var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-        for ( var i = 0; i < 8; i++ ) {
-            bookingref += characters.charAt(Math.floor(Math.random() * 8));
-        }
-        document.getElementById("bookingref").value = bookingref;
-    }
-</script>
 
 </body>
 </html>

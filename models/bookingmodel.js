@@ -8,7 +8,8 @@ var bookingSchema = new mongoose.Schema(
         check_out:{type:Date},
         room_type:{type:String},
         email:{type:String},
-        phone:{type:String}
+        phone:{type:String},
+        bookingref:{type:String}
     }
 );
 mongoose.model('booking',bookingSchema);

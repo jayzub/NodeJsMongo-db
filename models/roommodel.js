@@ -8,7 +8,8 @@ var roomSchema = new mongoose.Schema(
         occupancy:{type:Number},
         bed:{type:String},
         price:{type:Number},
-        image:{type:String}
+        image:{type:String},
+        description:{type:String}
     }
 );
 mongoose.model('room',roomSchema);

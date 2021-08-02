@@ -2623,7 +2623,7 @@ ol {
 
 @media only screen and (min-width: 1200px) {
 	.container {
-		max-width: 1200px;
+		max-width: 100%;
 	}
 }
 
@@ -3339,6 +3339,20 @@ ol {
 		margin-bottom: 15px;
 	}
 }
+
+.availabilty{
+	border-radius: 8px;
+	border: 1px solid ;
+	border-color: #707070;
+	padding: 4px;
+	  background-color: #F8F9FC;
+	  margin-left: 2em;
+	  margin-right: 2em;
+	margin-top: 20em;
+	margin-bottom: 1px;
+	padding-top: 25px;
+	padding-bottom: 25px;
+  }
 
 
 

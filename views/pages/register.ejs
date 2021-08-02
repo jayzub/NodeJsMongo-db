@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('../partials/head'); %>
+</head>
+<body class="container">
+
+<header>
+  <%- include('../partials/header'); %>
+</header>
+
+<main>
+    <div id="booking" class="section">
+        <div class="section-center">
+            <div class="container">
+                <div class="row">
+                    <div class="booking-form">
+                        <div class="form-header">
+                            <h1>Register</h1>
+                        </div>
+                        <form action="/Register" method="POST">
+                            <div class="form-group"> <input class="form-control" type="text" name="firstname" id="firstname" placeholder="First Name" required> <span class="form-label">First Name</span> </div>
+                            <div class="form-group"> <input class="form-control" type="text" name="lastname" id="lastname" placeholder="Last Name" required> <span class="form-label">Last Name</span> </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group"> <input class="form-control" type="email" name="emailid" id="emailid" placeholder="Email Address" required> <span class="form-label">Email</span> </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group"> <input class="form-control" type="tel" name="phonenumber" id="phonenumber" placeholder="Phone Number" required> <span class="form-label">Phone</span> </div>
+                                </div>
+                              
+                            </div>
+                            <div class="form-group"> <input class="form-control" type="UserName" name="username" id="username" placeholder="UserName" required> <span class="form-label">User Name</span> </div>
+                            <div class="form-group"> <input class="form-control" type="Password" name="password" id="password" placeholder="Password" required> <span class="form-label">Password</span> </div>
+                            
+
+                            <div class="form-btn"> <button class="submit-btn">Sign Up</button> </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer>
+  <%- include('../partials/footer'); %>
+</footer>
+
+</body>
+</html>

@@ -1,20 +1,78 @@
-<html>
-    <head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+  <%- include('../partials/head'); %>
+</head>
+<body class="container">
 
-    </head>
-    <body>
-        <h2>List of all the bookings</h2>
-        <section data-position='bookings'>
-            <% for(var i=0; i<allBookings.length; i++){ %>
-                <%= allBookings[i].first_name %> &nbsp;
-                <%= allBookings[i].last_name %> &nbsp;
-                <%= allBookings[i].email %> &nbsp;<br/>
-            <% } %>
-        </section>
-        <h2>Find Booking by ID</h2>
-        <form action="/bookings/findbyemail" method="GET">
-            <input type="text" name="email" id="email" placeholder="Enter Booking email"/>
-            <input type="submit" value="Search by email"/>
-        </form>
-    </body>
+<header>
+  <%- include('../partials/header'); %>
+</header>
+
+<main>
+    <section>
+        <h2>Find Booking by Email</h2>
+        <form action="/bookings/findbyemail" method="GET" class="form-inline">
+            <div class="form-group mx-sm-3 mb-2">
+                <label for="email" class="sr-only">Email</label>
+                <input type="text" class="form-control" name="email" id="email" placeholder="Enter Booking email">
+            </div>
+            <button type="submit" class="btn btn-primary mb-2">Search</button>
+        </form>  
+    </section>
+
+    <section>
+        <h2>Find Booking by Booking Reference</h2>
+        <form action="/bookings/findbyref" method="GET" class="form-inline">
+            <div class="form-group mx-sm-3 mb-2">
+                <label for="email" class="sr-only">Booking Reference</label>
+                <input type="text" class="form-control" name="bookingref" id="bookingref" placeholder="Enter Booking reference">
+            </div>
+            <button type="submit" class="btn btn-primary mb-2">Search</button>
+        </form>  
+    </section>
+
+    <section data-position='bookings'>
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                <th scope="col">#</th>
+                <th scope="col">First Name</th>
+                <th scope="col">Last Name</th>
+                <th scope="col">Checkin Date</th>
+                <th scope="col">Checkout Date</th>
+                <th scope="col">Room Type</th>
+                <th scope="col">Email Address</th>
+                <th scope="col">Phone Number</th>
+                <th scope="col">Booking Reference</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for(var i=0; i<allBookings.length; i++){ %>
+                <tr>
+                <th scope="row"><%= i+1 %></th>
+                <td><%= allBookings[i].first_name %></td>
+                <td><%= allBookings[i].last_name %></td>
+                <td><%= dateFormat(allBookings[i].check_in) %></td>
+                <td><%= dateFormat(allBookings[i].check_out) %></td>
+                <td><%= allBookings[i].room_type %></td>
+                <td><%= allBookings[i].email %></td>
+                <td><%= allBookings[i].phone %></td>
+                <td><%= allBookings[i].bookingref %></td>
+                <td><a href="/bookings/edit/<%= allBookings[i].bookingref %>">Edit</a></td>
+                <td><form action="/bookings/cancel/<%= allBookings[i].bookingref %>?_method=DELETE" method="POST"><button class="btn btn-danger" onclick="return confirm('Are you sure you want to cancel this booking?')">Cancel</button>
+                </form></td>
+                </tr>
+                <% } %>
+            </tbody>
+            </table>
+    </section> 
+</main>
+
+<footer>
+  <%- include('../partials/footer'); %>
+</footer>
+
+</body>
 </html>
